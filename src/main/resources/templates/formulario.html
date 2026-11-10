@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario de Videojuego</title>
+</head>
+<body>
+    <h1>Guardar Videojuego</h1>
+    
+    <form th:action="@{/videojuegos/guardar}" th:object="${videojuego}" method="post">
+        <!-- Campo oculto para el ID (necesario para actualizar) -->
+        <input type="hidden" th:field="*{id}" />
+        
+        <label>Título:</label>
+        <input type="text" th:field="*{titulo}" required /><br><br>
+        
+        <label>Precio:</label>
+        <input type="number" step="0.01" th:field="*{precio}" required /><br><br>
+        
+        <label>Desarrollador:</label>
+        <select th:field="*{desarrollador}" required>
+            <option value="">-- Selecciona un Desarrollador --</option>
+            <option th:each="dev : ${desarrolladores}" 
+                    th:value="${dev.id}" 
+                    th:text="${dev.nombre}"></option>
+        </select><br><br>
+        
+        <button type="submit">Guardar</button>
+    </form>
+    <br>
+    <a th:href="@{/videojuegos}">Volver a la lista</a>
+</body>
+</html>

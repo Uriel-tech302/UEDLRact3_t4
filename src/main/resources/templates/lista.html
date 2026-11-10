@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>CRUD de Videojuegos</title>
+</head>
+<body>
+    <h1>Catálogo de Videojuegos</h1>
+    <a th:href="@{/videojuegos/nuevo}">Añadir Nuevo Videojuego</a>
+    <br><br>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Precio</th>
+                <th>Desarrollador</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="videojuego : ${videojuegos}">
+                <td th:text="${videojuego.id}"></td>
+                <td th:text="${videojuego.titulo}"></td>
+                <td th:text="${videojuego.precio}"></td>
+                <!-- AQUÍ CUMPLES EL REQUISITO: Mostramos el nombre del desarrollador, no su ID -->
+                <td th:text="${videojuego.desarrollador.nombre}"></td>
+                <td>
+                    <a th:href="@{/videojuegos/editar/{id}(id=${videojuego.id})}">Editar</a> |
+                    <a th:href="@{/videojuegos/eliminar/{id}(id=${videojuego.id})}">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
